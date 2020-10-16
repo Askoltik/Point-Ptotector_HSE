@@ -28,29 +28,36 @@ public class LevelSpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        if (transform.parent.childCount == 3)
+        {
+            spawnLevel();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
+        
+        Debug.Log(transform.parent.childCount);
        
         if (collision.tag == "Defense" && onceResponse == true)
         {
-            Debug.Log(collision.name);
-                int levelIndex;
-                levelIndex = Random.Range(0, levels.Length);
-
-                GameObject levelInst = Instantiate(levels[levelIndex], new Vector2(0f,980f),
-    Quaternion.identity);
-            levelInst.transform.SetParent(canvas.transform, false);
-            onceResponse = false;
-               // Debug.Log(levels[levelIndex].name);
-            Destroy(gameObject);
+            spawnLevel();
         }
     }
+    void spawnLevel()
+    {
+        //  Debug.Log(collision.name);
+        int levelIndex;
+        levelIndex = Random.Range(0, levels.Length);
 
+        GameObject levelInst = Instantiate(levels[levelIndex], new Vector2(0f, 980f),
+        Quaternion.identity);
+        levelInst.transform.SetParent(canvas.transform, false);
+        onceResponse = false;
+        // Debug.Log(levels[levelIndex].name);
+        Destroy(gameObject);
+    }
 
 }
