@@ -38,8 +38,6 @@ public class LevelSpawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        Debug.Log(transform.parent.childCount);
        
         if (collision.tag == "Defense" && onceResponse == true)
         {
